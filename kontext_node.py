@@ -79,7 +79,7 @@ class KontextTemplateNode:
         prompt = prompt_map.get(template, template)
         return (prompt, image)
 
-# 节点注册
+# 节点注册 - 确保所有节点都被正确注册
 NODE_CLASS_MAPPINGS = {
     "KontextTemplateNode": KontextTemplateNode,
 }
@@ -90,8 +90,24 @@ NODE_DISPLAY_NAME_MAPPINGS = {
 
 # 从template_manager导入更多节点
 try:
-    from .template_manager import NODE_CLASS_MAPPINGS as MANAGER_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS as MANAGER_NAMES
-    NODE_CLASS_MAPPINGS.update(MANAGER_MAPPINGS)
-    NODE_DISPLAY_NAME_MAPPINGS.update(MANAGER_NAMES)
+    import importlib.util
+    import os
+    
+    # 获取当前目录
+    current_dir = os.path.dirname(__file__)
+    template_manager_path = os.path.join(current_dir, "template_manager.py")
+    
+    if os.path.exists(template_manager_path):
+        spec = importlib.util.spec_from_file_location("template_manager", template_manager_path)
+        template_manager = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(template_manager)
+        
+        if hasattr(template_manager, 'MANAGER_CLASS_MAPPINGS'):
+            NODE_CLASS_MAPPINGS.update(template_manager.MANAGER_CLASS_MAPPINGS)
+            NODE_DISPLAY_NAME_MAPPINGS.update(template_manager.MANAGER_DISPLAY_MAPPINGS)
+        elif hasattr(template_manager, 'NODE_CLASS_MAPPINGS'):
+            NODE_CLASS_MAPPINGS.update(template_manager.NODE_CLASS_MAPPINGS)
+            NODE_DISPLAY_NAME_MAPPINGS.update(template_manager.NODE_DISPLAY_NAME_MAPPINGS)
+    
 except Exception as e:
     print(f"Warning: Could not load template manager nodes: {e}")

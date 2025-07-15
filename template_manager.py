@@ -267,14 +267,18 @@ class KontextTemplateSelector:
         return (template_names, json.dumps(templates, ensure_ascii=False, indent=2))
 
 
-# 节点注册
-# 定义节点注册变量
-NODE_CLASS_MAPPINGS = {
+# 节点注册 - 这些将由主模块合并
+MANAGER_CLASS_MAPPINGS = {
     "KontextTemplateManager": KontextTemplateManagerNode,
     "KontextTemplateSelector": KontextTemplateSelector,
 }
 
-NODE_DISPLAY_NAME_MAPPINGS = {
+MANAGER_DISPLAY_MAPPINGS = {
     "KontextTemplateManager": "Kontext 模板管理",
     "KontextTemplateSelector": "Kontext 模板选择器",
 }
+
+# 向后兼容 - 只在作为主模块时注册
+if __name__ != "__main__":
+    NODE_CLASS_MAPPINGS = MANAGER_CLASS_MAPPINGS
+    NODE_DISPLAY_NAME_MAPPINGS = MANAGER_DISPLAY_MAPPINGS
