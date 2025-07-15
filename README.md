@@ -94,69 +94,6 @@ git clone https://github.com/aqidesign/kontex_promt.git
 - 某些模板可能不需要参数
 - 自定义提示词会覆盖模板选择
 
-## 🛠️ 模板管理功能
-
-### 新增节点
-- **Kontext 模板管理**：添加、修改、删除模板
-- **Kontext 模板选择器**：动态获取模板列表
-
-### 详细使用指南
-查看 [MANAGER_GUIDE.md](MANAGER_GUIDE.md) 获取完整的使用说明和示例。
-
-### 快速开始
-
-#### 添加自定义模板
-1. 添加 **Kontext 模板管理** 节点
-2. 设置 `action = add`
-3. 填写模板信息
-4. 执行节点完成添加
-
-#### 使用自定义模板
-1. 添加 **Kontext 模板选择器** 节点
-2. 选择 `user_custom` 类别
-3. 获取自定义模板列表
-
-#### 完整操作流程
-参考 [MANAGER_GUIDE.md](MANAGER_GUIDE.md) 获取详细的操作步骤和最佳实践。
-
-#### 模板文件结构
-```
-kontex_promt/
-├── __init__.py
-├── kontext_node.py          # 主节点
-├── template_manager.py      # 模板管理节点
-├── templates.json           # 默认模板
-├── user_templates.json      # 用户自定义模板
-└── README.md
-```
-
-### 自定义模板示例
-
-#### 添加新模板
-在模板管理节点中：
-- **动作**: add
-- **类别**: user_custom
-- **模板名称**: 复古风格
-- **提示词**: Turn this into vintage style {year} photo
-- **参数**: year
-
-#### 使用自定义模板
-1. 在模板管理节点添加模板
-2. 在模板选择器中选择"user_custom"类别
-3. 选择你创建的模板
-4. 填写参数使用
-
-### 模板备份
-```bash
-# 导出模板
-动作: export
-文件路径: C:/Users/YourName/Documents/my_templates.json
-
-# 导入模板
-动作: import
-文件路径: C:/Users/YourName/Documents/my_templates.json
-```
-
 ## 故障排除
 
 ### 节点加载失败 / UTF-8编码问题
@@ -178,9 +115,7 @@ kontex_promt/
 kontex_promt/
 ├── __init__.py
 ├── kontext_node.py
-├── template_manager.py
 ├── templates.json
-├── user_templates.json
 └── README.md
 ```
 
