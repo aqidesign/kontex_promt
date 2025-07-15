@@ -49,20 +49,6 @@
           "prompt": "Turn this into an oil painting",
           "description": "将图像转换为油画风格",
           "parameters": []
-        },
-        {
-          "id": "pixel_art",
-          "name": "像素艺术",
-          "prompt": "Turn this into pixel art",
-          "description": "将图像转换为像素艺术风格",
-          "parameters": []
-        },
-        {
-          "id": "van_gogh_style",
-          "name": "梵高风格",
-          "prompt": "This image in the style of Van Gogh's \"The Starry Night\"",
-          "description": "将图像转换为梵高《星夜》风格",
-          "parameters": []
         }
       ]
     },
@@ -82,20 +68,6 @@
           "prompt": "Give {subject} {clothing}",
           "description": "给角色添加服装或配饰",
           "parameters": ["subject", "clothing"]
-        },
-        {
-          "id": "change_pose",
-          "name": "改变姿势",
-          "prompt": "{subject} is now {action}",
-          "description": "改变角色的动作或姿势",
-          "parameters": ["subject", "action"]
-        },
-        {
-          "id": "transform_character",
-          "name": "角色变换",
-          "prompt": "Turn {subject} into {new_form}",
-          "description": "将角色变换为其他形态",
-          "parameters": ["subject", "new_form"]
         }
       ]
     },
@@ -113,15 +85,8 @@
           "id": "change_time",
           "name": "时间变换",
           "prompt": "Make it {time_of_day}",
-          "description": "改变图像的时间（白天/夜晚/季节）",
+          "description": "改变图像的时间",
           "parameters": ["time_of_day"]
-        },
-        {
-          "id": "add_weather",
-          "name": "添加天气",
-          "prompt": "Add {weather} to the scene",
-          "description": "为场景添加天气效果",
-          "parameters": ["weather"]
         }
       ]
     },
@@ -136,18 +101,11 @@
           "parameters": ["old_text", "new_text"]
         },
         {
-          "id": "remove_text",
-          "name": "移除文字",
-          "prompt": "Remove the text",
-          "description": "移除图像中的所有文字",
-          "parameters": []
-        },
-        {
           "id": "add_text",
           "name": "添加文字",
-          "prompt": "Add the words \"{text}\" {position}",
-          "description": "在指定位置添加文字",
-          "parameters": ["text", "position"]
+          "prompt": "Add the words \"{text}\"",
+          "description": "添加文字到图像",
+          "parameters": ["text"]
         }
       ]
     },
@@ -167,13 +125,6 @@
           "prompt": "Change the color palette to be more {palette}",
           "description": "改变整体色调",
           "parameters": ["palette"]
-        },
-        {
-          "id": "recolor_image",
-          "name": "重新着色",
-          "prompt": "Recolor this {style}",
-          "description": "以特定风格重新着色",
-          "parameters": ["style"]
         }
       ]
     },
@@ -190,16 +141,9 @@
         {
           "id": "zoom_out",
           "name": "缩小",
-          "prompt": "Zoom out to show {content}",
+          "prompt": "Zoom out to show the whole scene",
           "description": "缩小显示更多内容",
-          "parameters": ["content"]
-        },
-        {
-          "id": "change_perspective",
-          "name": "改变视角",
-          "prompt": "The camera {action}",
-          "description": "改变相机视角",
-          "parameters": ["action"]
+          "parameters": []
         }
       ]
     }

@@ -1,14 +1,14 @@
-# ComfyUI Kontext Prompt Templates - Dependencies
-# 这些依赖库通常已经包含在ComfyUI环境中
+# ComfyUI Kontext Prompt Templates
+# 这些依赖通常已包含在ComfyUI环境中，无需额外安装
 
-# 基础依赖
-pillow>=8.0.0
-numpy>=1.19.0
-torch>=1.8.0
-
-# JSON处理（Python内置，无需额外安装）
+# 基础依赖（已内置）
+# pillow
+# numpy  
+# torch
 # json
-
-# 文件路径处理（Python内置，无需额外安装）  
 # os
 # typing
+
+# 如果需要额外的依赖，请在这里添加
+# 例如：
+# requests>=2.25.0
