@@ -1,0 +1,207 @@
+{
+  "categories": {
+    "object_manipulation": {
+      "name": "物体操作",
+      "templates": [
+        {
+          "id": "remove_object",
+          "name": "移除物体",
+          "prompt": "Remove {object}",
+          "description": "从图像中移除指定物体",
+          "parameters": ["object"]
+        },
+        {
+          "id": "add_object",
+          "name": "添加物体",
+          "prompt": "Add {object} {position}",
+          "description": "在指定位置添加物体",
+          "parameters": ["object", "position"]
+        },
+        {
+          "id": "replace_object",
+          "name": "替换物体",
+          "prompt": "Replace {old_object} with {new_object}",
+          "description": "将旧物体替换为新物体",
+          "parameters": ["old_object", "new_object"]
+        }
+      ]
+    },
+    "style_transfer": {
+      "name": "风格转换",
+      "templates": [
+        {
+          "id": "anime_style",
+          "name": "动漫风格",
+          "prompt": "Turn this into anime artwork",
+          "description": "将图像转换为动漫风格",
+          "parameters": []
+        },
+        {
+          "id": "real_photo",
+          "name": "真实照片",
+          "prompt": "Make this into a real photo",
+          "description": "将图像转换为真实照片风格",
+          "parameters": []
+        },
+        {
+          "id": "oil_painting",
+          "name": "油画风格",
+          "prompt": "Turn this into an oil painting",
+          "description": "将图像转换为油画风格",
+          "parameters": []
+        },
+        {
+          "id": "pixel_art",
+          "name": "像素艺术",
+          "prompt": "Turn this into pixel art",
+          "description": "将图像转换为像素艺术风格",
+          "parameters": []
+        },
+        {
+          "id": "van_gogh_style",
+          "name": "梵高风格",
+          "prompt": "This image in the style of Van Gogh's \"The Starry Night\"",
+          "description": "将图像转换为梵高《星夜》风格",
+          "parameters": []
+        }
+      ]
+    },
+    "character_manipulation": {
+      "name": "角色操作",
+      "templates": [
+        {
+          "id": "change_expression",
+          "name": "改变表情",
+          "prompt": "Make {subject} {expression}",
+          "description": "改变角色的表情",
+          "parameters": ["subject", "expression"]
+        },
+        {
+          "id": "add_clothing",
+          "name": "添加服装",
+          "prompt": "Give {subject} {clothing}",
+          "description": "给角色添加服装或配饰",
+          "parameters": ["subject", "clothing"]
+        },
+        {
+          "id": "change_pose",
+          "name": "改变姿势",
+          "prompt": "{subject} is now {action}",
+          "description": "改变角色的动作或姿势",
+          "parameters": ["subject", "action"]
+        },
+        {
+          "id": "transform_character",
+          "name": "角色变换",
+          "prompt": "Turn {subject} into {new_form}",
+          "description": "将角色变换为其他形态",
+          "parameters": ["subject", "new_form"]
+        }
+      ]
+    },
+    "environment_change": {
+      "name": "环境变换",
+      "templates": [
+        {
+          "id": "change_background",
+          "name": "更换背景",
+          "prompt": "Replace the background with {environment}",
+          "description": "更换图像背景环境",
+          "parameters": ["environment"]
+        },
+        {
+          "id": "change_time",
+          "name": "时间变换",
+          "prompt": "Make it {time_of_day}",
+          "description": "改变图像的时间（白天/夜晚/季节）",
+          "parameters": ["time_of_day"]
+        },
+        {
+          "id": "add_weather",
+          "name": "添加天气",
+          "prompt": "Add {weather} to the scene",
+          "description": "为场景添加天气效果",
+          "parameters": ["weather"]
+        }
+      ]
+    },
+    "text_manipulation": {
+      "name": "文字操作",
+      "templates": [
+        {
+          "id": "change_text",
+          "name": "修改文字",
+          "prompt": "Change the text \"{old_text}\" to \"{new_text}\"",
+          "description": "修改图像中的文字内容",
+          "parameters": ["old_text", "new_text"]
+        },
+        {
+          "id": "remove_text",
+          "name": "移除文字",
+          "prompt": "Remove the text",
+          "description": "移除图像中的所有文字",
+          "parameters": []
+        },
+        {
+          "id": "add_text",
+          "name": "添加文字",
+          "prompt": "Add the words \"{text}\" {position}",
+          "description": "在指定位置添加文字",
+          "parameters": ["text", "position"]
+        }
+      ]
+    },
+    "color_adjustment": {
+      "name": "颜色调整",
+      "templates": [
+        {
+          "id": "change_color",
+          "name": "改变颜色",
+          "prompt": "Change the color to {color}",
+          "description": "改变物体的颜色",
+          "parameters": ["color"]
+        },
+        {
+          "id": "change_palette",
+          "name": "改变调色板",
+          "prompt": "Change the color palette to be more {palette}",
+          "description": "改变整体色调",
+          "parameters": ["palette"]
+        },
+        {
+          "id": "recolor_image",
+          "name": "重新着色",
+          "prompt": "Recolor this {style}",
+          "description": "以特定风格重新着色",
+          "parameters": ["style"]
+        }
+      ]
+    },
+    "camera_operations": {
+      "name": "镜头操作",
+      "templates": [
+        {
+          "id": "zoom_in",
+          "name": "放大",
+          "prompt": "Zoom in on {subject}",
+          "description": "放大查看特定区域",
+          "parameters": ["subject"]
+        },
+        {
+          "id": "zoom_out",
+          "name": "缩小",
+          "prompt": "Zoom out to show {content}",
+          "description": "缩小显示更多内容",
+          "parameters": ["content"]
+        },
+        {
+          "id": "change_perspective",
+          "name": "改变视角",
+          "prompt": "The camera {action}",
+          "description": "改变相机视角",
+          "parameters": ["action"]
+        }
+      ]
+    }
+  }
+}
