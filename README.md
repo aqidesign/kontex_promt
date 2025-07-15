@@ -1,14 +1,21 @@
-# Kontext ComfyUI 节点
+# Kontext ComfyUI 提示词模板
 
-基于 kontext 图像编辑 AI 模型训练数据的 ComfyUI 提示词模板节点。
+基于 1026 个 kontext 训练提示词整理的 ComfyUI 节点，提供图像编辑提示词模板。
 
-## 功能特点
+## 🚀 快速开始
 
-- **7大类别模板**：物体操作、风格转换、角色操作、环境变换、文字操作、颜色调整、镜头操作
-- **动态参数**：支持自定义参数输入
-- **中文支持**：包含中英文对照的提示词
-- **易于扩展**：可通过修改 JSON 文件添加新模板
-- **1026个模板**：基于真实训练数据整理
+### 安装
+```bash
+cd ComfyUI/custom_nodes
+git clone https://github.com/aqidesign/kontex_promt.git
+```
+
+### 使用
+1. 重启 ComfyUI
+2. 添加 "Kontext 提示词模板" 节点
+3. 选择模板类别和具体模板
+4. 填写参数（可选）
+5. 获取生成的提示词
 
 ## 安装方法
 
@@ -89,17 +96,28 @@ git clone https://github.com/aqidesign/kontex_promt.git
 
 ## 故障排除
 
-### 问题1：节点不显示
-- 确保文件放在正确的 `custom_nodes` 目录
-- 检查 ComfyUI 控制台是否有错误信息
+### 节点加载失败 / UTF-8编码问题
+**症状**：Import failed, 乱码，节点不显示
 
-### 问题2：模板加载失败
-- 检查 `templates.json` 文件是否存在且格式正确
-- 确保 JSON 文件使用 UTF-8 编码
+**解决**：
+1. **Windows用户**：用记事本打开文件，另存为UTF-8格式
+2. **VS Code**：点击右下角编码 → 选择"UTF-8"
+3. **重新安装**：
+   ```bash
+   cd ComfyUI/custom_nodes
+   rm -rf kontex_promt
+   git clone https://github.com/aqidesign/kontex_promt.git
+   ```
 
-### 问题3：参数不生效
-- 检查参数是否与模板要求的名称匹配
-- 确保参数值不为空
+### 文件结构验证
+确保目录结构：
+```
+kontex_promt/
+├── __init__.py
+├── kontext_node.py
+├── templates.json
+└── README.md
+```
 
 ## 更新日志
 
