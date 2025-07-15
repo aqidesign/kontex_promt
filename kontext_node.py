@@ -1,153 +1,89 @@
 import json
 import os
-from typing import Dict, Any, List, Tuple
-import torch
-import numpy as np
-from PIL import Image
 
 class KontextTemplateNode:
     """
-    ComfyUI节点：Kontext提示词模板
-    基于kontext训练数据创建的提示词模板系统
+    Kontext提示词模板节点
+    基于kontext训练数据的ComfyUI提示词模板
     """
     
-    def __init__(self):
-        self.templates_path = os.path.join(os.path.dirname(__file__), "templates.json")
-        self.templates = self._load_templates()
-    
-    def _load_templates(self) -> Dict:
-        """加载模板配置文件"""
-        try:
-            with open(self.templates_path, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        except Exception as e:
-            print(f"Error loading templates: {e}")
-            return {}
-    
     @classmethod
-    def INPUT_TYPES(cls) -> Dict[str, Any]:
-        """定义节点的输入类型"""
-        # 获取模板类别
-        templates = cls().templates
-        categories = list(templates.get('categories', {}).keys())
-        
-        # 构建类别下拉选项
-        category_options = []
-        for cat_key, cat_data in templates.get('categories', {}).items():
-            category_options.append(f"{cat_data['name']} ({cat_key})")
-        
+    def INPUT_TYPES(cls):
+        """定义节点输入"""
         return {
             "required": {
                 "image": ("IMAGE",),
-                "category": (category_options, {"default": category_options[0] if category_options else ""}),
-                "template": (["请先选择类别"], {"default": "请先选择类别"}),
+                "category": (["物体操作", "风格转换", "角色操作", "环境变换", "文字操作", "颜色调整", "镜头操作"],),
+                "template": (["移除物体", "添加物体", "替换物体", "动漫风格", "真实照片", "油画风格"],),
+                "parameter_1": ("STRING", {"default": ""}),
+                "parameter_2": ("STRING", {"default": ""}),
             },
             "optional": {
-                "parameter_1": ("STRING", {"default": "", "multiline": False}),
-                "parameter_2": ("STRING", {"default": "", "multiline": False}),
-                "parameter_3": ("STRING", {"default": "", "multiline": False}),
                 "custom_prompt": ("STRING", {"default": "", "multiline": True}),
             }
         }
     
     RETURN_TYPES = ("STRING", "IMAGE")
-    RETURN_NAMES = ("prompt", "image_preview")
+    RETURN_NAMES = ("prompt", "image")
     FUNCTION = "generate_prompt"
     CATEGORY = "kontext"
     
-    def generate_prompt(self, image, category, template, parameter_1="", parameter_2="", parameter_3="", custom_prompt="") -> Tuple[str, torch.Tensor]:
-        """生成提示词"""
-        
-        # 如果有自定义提示词，优先使用
-        if custom_prompt.strip():
-            return (custom_prompt, image)
-        
-        # 解析类别
-        category_key = category.split("(")[-1].rstrip(")")
-        
-        # 获取模板数据
-        templates_data = self.templates.get('categories', {})
-        if category_key not in templates_data:
-            return ("Error: Invalid category", image)
-        
-        # 找到选中的模板
-        template_list = templates_data[category_key].get('templates', [])
-        selected_template = None
-        
-        for tmpl in template_list:
-            if tmpl.get('name') == template:
-                selected_template = tmpl
-                break
-        
-        if not selected_template:
-            return ("Error: Template not found", image)
-        
-        # 构建提示词
-        prompt_template = selected_template.get('prompt', '')
-        parameters = selected_template.get('parameters', [])
-        
-        # 替换参数
-        param_values = [parameter_1, parameter_2, parameter_3]
-        final_prompt = prompt_template
-        
-        for i, param in enumerate(parameters):
-            if i < len(param_values) and param_values[i].strip():
-                placeholder = "{" + param + "}"
-                final_prompt = final_prompt.replace(placeholder, param_values[i])
-        
-        return (final_prompt, image)
+    def __init__(self):
+        self.templates_path = os.path.join(os.path.dirname(__file__), "templates.json")
+        self.templates = self._load_templates()
     
-    @classmethod
-    def get_templates_by_category(cls, category_key: str) -> List[str]:
-        """获取指定类别的模板列表"""
-        instance = cls()
-        templates_data = instance.templates.get('categories', {})
-        
-        if category_key not in templates_data:
-            return []
-        
-        templates = templates_data[category_key].get('templates', [])
-        return [tmpl.get('name', '') for tmpl in templates]
-
-class KontextTemplateSelector:
-    """
-    辅助节点：模板选择器
-    用于动态更新模板列表
-    """
+    def _load_templates(self):
+        """加载模板配置"""
+        try:
+            with open(self.templates_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except:
+            return self._get_default_templates()
     
-    @classmethod
-    def INPUT_TYPES(cls) -> Dict[str, Any]:
-        templates = KontextTemplateNode().templates
-        categories = list(templates.get('categories', {}).keys())
-        
-        category_options = []
-        for cat_key, cat_data in templates.get('categories', {}).items():
-            category_options.append(f"{cat_data['name']} ({cat_key})")
-        
+    def _get_default_templates(self):
+        """默认模板配置"""
         return {
-            "required": {
-                "category": (category_options, {"default": category_options[0] if category_options else ""}),
+            "object_manipulation": {
+                "name": "物体操作",
+                "templates": [
+                    {"prompt": "Remove {object}", "name": "移除物体"},
+                    {"prompt": "Add {object}", "name": "添加物体"},
+                    {"prompt": "Replace {old} with {new}", "name": "替换物体"}
+                ]
+            },
+            "style_transfer": {
+                "name": "风格转换", 
+                "templates": [
+                    {"prompt": "Turn this into anime artwork", "name": "动漫风格"},
+                    {"prompt": "Make this into a real photo", "name": "真实照片"},
+                    {"prompt": "Turn this into an oil painting", "name": "油画风格"}
+                ]
             }
         }
     
-    RETURN_TYPES = ("LIST",)
-    RETURN_NAMES = ("templates",)
-    FUNCTION = "get_templates"
-    CATEGORY = "kontext"
-    
-    def get_templates(self, category):
-        """获取指定类别的模板列表"""
-        category_key = category.split("(")[-1].rstrip(")")
-        templates = KontextTemplateNode.get_templates_by_category(category_key)
-        return (templates,)
+    def generate_prompt(self, image, category, template, parameter_1="", parameter_2="", custom_prompt=""):
+        """生成提示词"""
+        if custom_prompt.strip():
+            return (custom_prompt, image)
+        
+        # 简化处理
+        prompt_map = {
+            "移除物体": f"Remove {parameter_1}" if parameter_1 else "Remove object",
+            "添加物体": f"Add {parameter_1}" if parameter_1 else "Add object",
+            "替换物体": f"Replace {parameter_1} with {parameter_2}" if parameter_1 and parameter_2 else "Replace object",
+            "动漫风格": "Turn this into anime artwork",
+            "真实照片": "Make this into a real photo",
+            "油画风格": "Turn this into an oil painting"
+        }
+        
+        prompt = prompt_map.get(template, template)
+        return (prompt, image)
 
-# Web UI 更新函数
+# 节点注册
 NODE_CLASS_MAPPINGS = {
     "KontextTemplateNode": KontextTemplateNode,
-    "KontextTemplateSelector": KontextTemplateSelector,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "KontextTemplateNode": "Kontext 提示词模板",
-    "KontextTemplateSelector": "模板选择器",
 }
