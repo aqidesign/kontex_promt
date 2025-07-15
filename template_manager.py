@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import json
 import os
 from typing import Dict, Any, List
@@ -267,12 +268,13 @@ class KontextTemplateSelector:
 
 
 # 节点注册
-NODE_CLASS_MAPPINGS.update({
+# 定义节点注册变量
+NODE_CLASS_MAPPINGS = {
     "KontextTemplateManager": KontextTemplateManagerNode,
     "KontextTemplateSelector": KontextTemplateSelector,
-})
+}
 
-NODE_DISPLAY_NAME_MAPPINGS.update({
+NODE_DISPLAY_NAME_MAPPINGS = {
     "KontextTemplateManager": "Kontext 模板管理",
     "KontextTemplateSelector": "Kontext 模板选择器",
-})
+}

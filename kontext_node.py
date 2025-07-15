@@ -79,18 +79,19 @@ class KontextTemplateNode:
         prompt = prompt_map.get(template, template)
         return (prompt, image)
 
-# 节点注册（从template_manager导入更多节点）
+# 节点注册
+NODE_CLASS_MAPPINGS = {
+    "KontextTemplateNode": KontextTemplateNode,
+}
+
+NODE_DISPLAY_NAME_MAPPINGS = {
+    "KontextTemplateNode": "Kontext 提示词模板",
+}
+
+# 从template_manager导入更多节点
 try:
     from .template_manager import NODE_CLASS_MAPPINGS as MANAGER_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS as MANAGER_NAMES
     NODE_CLASS_MAPPINGS.update(MANAGER_MAPPINGS)
     NODE_DISPLAY_NAME_MAPPINGS.update(MANAGER_NAMES)
-except:
-    pass
-
-NODE_CLASS_MAPPINGS.update({
-    "KontextTemplateNode": KontextTemplateNode,
-})
-
-NODE_DISPLAY_NAME_MAPPINGS.update({
-    "KontextTemplateNode": "Kontext 提示词模板",
-})
+except Exception as e:
+    print(f"Warning: Could not load template manager nodes: {e}")
