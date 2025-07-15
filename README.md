@@ -1,46 +1,45 @@
 # Kontext ComfyUI 提示词模板
 
-基于 1026 个 kontext 训练提示词整理的 ComfyUI 节点，提供图像编辑提示词模板。
+> 基于 1026 个 kontext 训练提示词整理的 ComfyUI 节点，提供专业的图像编辑提示词模板。
+
+## ✨ 特性
+
+- 🎨 **丰富模板**: 涵盖物体操作、风格转换、角色编辑等7大类别
+- 🚀 **即插即用**: 简单易用的ComfyUI节点接口
+- 📦 **缓存优化**: 智能模板缓存机制，提升性能
+- 🔧 **参数验证**: 内置输入参数验证，确保安全性
+- 📚 **类型提示**: 完整的类型注解，便于开发维护
 
 ## 🚀 快速开始
 
-### 安装
+### 安装方法
+
+**Git 安装（推荐）**：
 ```bash
 cd ComfyUI/custom_nodes
 git clone https://github.com/aqidesign/kontex_promt.git
 ```
 
-### 使用
-1. 重启 ComfyUI
-2. 添加 "Kontext 提示词模板" 节点
-3. 选择模板类别和具体模板
-4. 填写参数（可选）
-5. 获取生成的提示词
-
-## 安装方法
-
-### 方法1：手动安装
-1. 将 `kontext_node.py` 和 `templates.json` 复制到 ComfyUI 的 `custom_nodes` 目录
+**手动安装**：
+1. 下载所有文件到 ComfyUI 的 `custom_nodes` 目录
 2. 重启 ComfyUI
 
-### 方法2：Git安装
-```bash
-cd ComfyUI/custom_nodes
-git clone https://github.com/aqidesign/kontex_promt.git
-```
+### 基础使用
 
-## 使用方法
+1. 在 ComfyUI 中添加 `Kontext 提示词模板` 节点
+2. 选择模板类型（如"移除物体"、"动漫风格"等）
+3. 填写 target 参数（目标对象/位置/数值）
+4. 连接到其他节点使用生成的提示词
 
-### 基本使用
-1. 在 ComfyUI 中找到 `Kontext 提示词模板` 节点
-2. 选择具体模板（如"移除物体"、"动漫风格"等）
-3. 填写target参数（目标对象/位置/数值）
-4. 获取生成的英文提示词
+## 📖 使用指南
 
 ### 参数说明
-- **template**: 具体模板（18个预设选项）
-- **target**: 目标对象/位置/数值（根据模板需求填写）
-- **custom_prompt**: 自定义提示词（优先使用）
+
+| 参数 | 类型 | 描述 | 必填 |
+|------|------|------|------|
+| `template` | 下拉选择 | 预设模板选项 | ✅ |
+| `target` | 字符串 | 目标对象/位置/数值 | ❌ |
+| `custom_prompt` | 多行文本 | 自定义提示词（优先级最高） | ❌ |
 
 ### 使用示例
 

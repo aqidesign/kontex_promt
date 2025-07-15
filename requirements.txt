@@ -1,0 +1,16 @@
+# ComfyUI Kontext Template Node Dependencies
+# Python version: 3.8+
+
+# Core dependencies (usually provided by ComfyUI)
+# torch>=1.13.0
+# torchvision>=0.14.0
+# numpy>=1.21.0
+# pillow>=9.0.0
+
+# Development dependencies
+typing-extensions>=4.0.0  # For better type hints support
+pathlib2>=2.3.0  # For older Python versions compatibility
+
+# Optional: For future enhancements
+# pydantic>=1.8.0  # For data validation
+# jsonschema>=4.0.0  # For template schema validation
