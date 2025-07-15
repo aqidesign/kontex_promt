@@ -33,36 +33,38 @@ git clone https://github.com/aqidesign/kontex_promt.git
 
 ### 基本使用
 1. 在 ComfyUI 中找到 `Kontext 提示词模板` 节点
-2. 选择模板类别（如"物体操作"、"风格转换"等）
-3. 选择具体的模板（如"移除物体"、"动漫风格"等）
-4. 根据需要填写参数
-5. 节点将输出生成的提示词
+2. 选择具体模板（如"移除物体"、"动漫风格"等）
+3. 填写target参数（目标对象/位置/数值）
+4. 获取生成的英文提示词
 
 ### 参数说明
-- **image**: 输入图像（用于预览）
-- **category**: 模板类别
-- **template**: 具体模板
-- **parameter_1/2/3**: 模板参数（根据模板需求填写）
+- **template**: 具体模板（18个预设选项）
+- **target**: 目标对象/位置/数值（根据模板需求填写）
 - **custom_prompt**: 自定义提示词（优先使用）
 
-### 示例模板
+### 使用示例
 
 #### 物体操作
-- **移除物体**: `Remove {object}` → 移除图像中的指定物体
-- **添加物体**: `Add {object} {position}` → 在指定位置添加物体
-- **替换物体**: `Replace {old_object} with {new_object}` → 替换物体
+- **移除物体**: target="桌子" → "Remove 桌子"
+- **添加物体**: target="花朵" → "Add 花朵"
+- **替换物体**: target="自行车" → "Replace with 自行车"
 
 #### 风格转换
-- **动漫风格**: `Turn this into anime artwork`
-- **真实照片**: `Make this into a real photo`
-- **油画风格**: `Turn this into an oil painting`
-- **梵高风格**: `This image in the style of Van Gogh's "The Starry Night"`
+- **动漫风格**: target="高质量" → "Transform into anime style 高质量"
+- **赛博朋克**: target="霓虹灯" → "Apply cyberpunk aesthetic 霓虹灯"
+- **复古风格**: target="1980年代" → "Apply vintage style 1980年代"
 
 #### 角色操作
-- **改变表情**: `Make {subject} {expression}`
-- **添加服装**: `Give {subject} {clothing}`
-- **改变姿势**: `{subject} is now {action}`
-- **角色变换**: `Turn {subject} into {new_form}`
+- **改变表情**: target="微笑" → "Change expression to 微笑"
+- **添加服装**: target="西装" → "Add 西装 clothing"
+
+#### 环境变换
+- **改变背景**: target="海滩" → "Change background to 海滩"
+- **添加天气效果**: target="雨天" → "Add 雨天 weather effect"
+
+#### 颜色调整
+- **黑白照片**: （无需参数）→ "Convert to black and white"
+- **复古色调**: target="暖色" → "Apply vintage tone 暖色"
 
 ## 模板扩展
 
