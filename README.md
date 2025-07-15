@@ -8,6 +8,7 @@
 - **动态参数**：支持自定义参数输入
 - **中文支持**：包含中英文对照的提示词
 - **易于扩展**：可通过修改 JSON 文件添加新模板
+- **1026个模板**：基于真实训练数据整理
 
 ## 安装方法
 
@@ -18,7 +19,7 @@
 ### 方法2：Git安装
 ```bash
 cd ComfyUI/custom_nodes
-git clone [your-repo-url] kontext-nodes
+git clone https://github.com/aqidesign/kontex_promt.git
 ```
 
 ## 使用方法
@@ -106,3 +107,8 @@ git clone [your-repo-url] kontext-nodes
 - 初始版本发布
 - 包含7大类别1026个模板
 - 支持中英文提示词
+- 基于kontext真实训练数据整理
+
+## 数据来源
+
+本项目基于kontext图像编辑AI模型的训练提示词进行整理和分类，原始数据包含1026个真实使用场景的提示词。
